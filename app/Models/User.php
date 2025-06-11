@@ -15,7 +15,7 @@ class User extends Authenticatable
     public $incrementing = false;
 
     protected $fillable = [
-        'uuid',
+        'id',
         'email',
         'discord_id',
         'password',
