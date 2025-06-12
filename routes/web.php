@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\LoginController as AuthLoginController;
 use App\Http\Controllers\Auth\RegisterController as AuthRegisterController;
 use App\Http\Controllers\Auth\DiscordController as AuthDiscordController;
 use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\LegalController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,7 +47,6 @@ Route::get('/admin/dashboard', function () {
     return view('dashboard.admin');
 })->middleware('auth')->name('admin.dashboard');
 
-// Password Change
 Route::middleware(['auth'])->group(function () {
     Route::get('/account/settings', [SettingsController::class, 'edit'])->name('account.settings');
     Route::post('/account/settings', [SettingsController::class, 'update'])->name('account.settings.update');
@@ -54,6 +54,7 @@ Route::middleware(['auth'])->group(function () {
 
 
 
+Route::get('legal/{section}', [LegalController::class, 'show'])->name('legal.show');
 
 
 
