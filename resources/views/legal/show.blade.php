@@ -7,10 +7,16 @@
     {!! Illuminate\Support\Str::markdown(__('legal.' . $section . '.content')) !!}
 </div>
 
-<a href="{{ route('legal.show', ['section' => 'privacy']) }}" class="text-blue-600 underline">{{ __('legal.privacy.title') }}</a> x
-<a href="{{ route('legal.show', ['section' => 'terms']) }}" class="text-blue-600 underline">{{ __('legal.terms.title') }}</a> x
-<a href="{{ route('legal.show', ['section' => 'imprint']) }}" class="text-blue-600 underline">{{ __('legal.imprint.title') }}</a> x
-...
+<div class="max-w-3xl mx-auto mt-8 px-6 space-x-4 text-sm">
+    @foreach (['privacy', 'terms', 'imprint'] as $item)
+        <a href="{{ route('legal.show', ['section' => $item]) }}"
+           class="{{ $section === $item ? 'font-semibold text-blue-700 underline' : 'text-blue-600 underline hover:text-blue-800' }}">
+           {{ __('legal.' . $item . '.title') }}
+        </a>
+        @if (!$loop->last)<span class="text-gray-400">|</span>@endif
+    @endforeach
+</div>
+
 <style>
 .markdown h1 { font-size: 2.25rem; font-weight: 700; margin-top: 2rem; margin-bottom: 1rem; color: #1f2937; }
 .markdown h2 { font-size: 1.875rem; font-weight: 600; margin-top: 2rem; margin-bottom: 1rem; color: #374151; }
@@ -31,5 +37,4 @@
   margin: 2rem 0;
 }
 </style>
-
 @endsection
