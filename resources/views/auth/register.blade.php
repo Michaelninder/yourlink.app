@@ -18,10 +18,12 @@
         <form method="POST" action="{{ route('register') }}" class="space-y-4">
             @csrf
 
-            <div>
+            {{--
+			<div>
                 <label class="block text-gray-700">{{ __('auth.username') }}</label>
                 <input type="text" name="username" class="w-full border px-3 py-2 rounded" value="{{ old('username') }}">
             </div>
+			--}}	
 
             <div>
                 <label class="block text-gray-700">{{ __('auth.email') }}</label>
@@ -43,6 +45,18 @@
                     <i id="register_confirm_icon" class="bi bi-eye-fill"></i>
                 </span>
             </div>
+			
+			<div class="mt-4">
+			    <label class="inline-flex items-start gap-2">
+			        <input type="checkbox" name="terms" required class="mt-1">
+			        <span class="text-sm text-gray-600">
+			            I accept the
+			            <a href="{{ route('legal.show', ['section' => 'terms']) }}" class="text-blue-600 underline">Terms of Service</a> 
+			            and 
+			            <a href="{{ route('legal.show', ['section' => 'privacy']) }}" class="text-blue-600 underline">Privacy Policy</a>.
+			        </span>
+			    </label>
+			</div>
 
             <div class="flex items-center">
                 <input type="checkbox" name="autologin" class="mr-2" checked> {{ __('auth.auto_login') }}
@@ -65,6 +79,12 @@
         <a href="{{ route('discord.redirect') }}" class="btn-discord w-full text-center py-2 rounded flex items-center justify-center mt-4">
             <i class="bi bi-discord text-lg mr-1"></i> {{ __('auth.discord_register') }}
         </a>
+		<p class="text-sm text-gray-500 mt-4">
+		    By continuing, you accept our 
+		    <a href="{{ route('legal.show', ['section' => 'terms']) }}" class="text-blue-600 underline">Terms of Service</a> 
+		    and 
+		    <a href="{{ route('legal.show', ['section' => 'privacy']) }}" class="text-blue-600 underline">Privacy Policy</a>.
+		</p>
     </div>
 </div>
 @endsection
