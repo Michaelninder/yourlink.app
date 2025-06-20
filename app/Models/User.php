@@ -32,8 +32,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function links()
-    {
-        return $this->hasMany(Link::class);
-    }
+	public function links()
+	{
+	    return $this->hasMany(Link::class);
+	}
+	
+	public function views()
+	{
+	    return $this->hasManyThrough(View::class, Link::class);
+	}
 }
