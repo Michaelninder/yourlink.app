@@ -2,17 +2,19 @@
 
 @section('content')
 <div class="flex min-h-screen">
-    <aside class="w-64 bg-gray-100 border-r border-gray-200 p-4 space-y-2">
-        <h2 class="text-lg font-semibold text-gray-700 mb-4">Dashboard</h2>
-        <nav class="space-y-1">
-            <a href="{{ route('dashboard.user') }}" class="block px-3 py-2 rounded hover:bg-gray-200 {{ request()->routeIs('dashboard.user') ? 'bg-gray-200 font-semibold' : '' }}">User Dashboard</a>
-            <a href="{{ route('dashboard.admin') }}" class="block px-3 py-2 rounded hover:bg-gray-200 {{ request()->routeIs('dashboard.admin') ? 'bg-gray-200 font-semibold' : '' }}">Admin Dashboard</a>
-            <a href="{{ route('account.settings') }}" class="block px-3 py-2 rounded hover:bg-gray-200">Account Settings</a>
+    <aside class="w-64 bg-gray-100 border-r p-6 space-y-4">
+        <h2 class="text-lg font-bold">Dashboard</h2>
+        <nav class="flex flex-col space-y-2">
+            <a href="{{ route('dashboard.user') }}" class="text-blue-600 hover:underline">Overview</a>
+            <a href="{{ route('account.settings') }}" class="text-blue-600 hover:underline">Account Settings</a>
+            @if(auth()->user()?->role === 'admin')
+                <a href="{{ route('dashboard.admin') }}" class="text-blue-600 hover:underline">Admin Panel</a>
+            @endif
         </nav>
-    </aside>a
+    </aside>
 
-    <main class="flex-1 p-6">
-        @yield('dashboard')
+    <main class="flex-1 p-8">
+        @yield('dashboard-content')
     </main>
 </div>
 @endsection
