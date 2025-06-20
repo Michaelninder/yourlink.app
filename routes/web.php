@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\RegisterController as AuthRegisterController;
 use App\Http\Controllers\Auth\DiscordController as AuthDiscordController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\LegalController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,15 +38,14 @@ Route::post('/register', [AuthRegisterController::class, 'register']);
 Route::get('/auth/discord/redirect', [AuthDiscordController::class, 'redirect'])->name('discord.redirect');
 Route::get('/auth/discord/callback', [AuthDiscordController::class, 'callback'])->name('discord.callback');
 
-// User Dashboard
-Route::get('/dashboard', function () {
-    return view('dashboard.user');
-})->middleware('auth')->name('user.dashboard');
 
-// Admin Dashboard
-Route::get('/admin/dashboard', function () {
-    return view('dashboard.admin');
-})->middleware('auth')->name('admin.dashboard');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'user'])->name('dashboard.user');
+
+    Route::middleware('is_admin')->group(function () {
+        Route::get('/admin', [DashboardController::class, 'admin'])->name('dashboard.admin');
+    });
+});
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/account/settings', [SettingsController::class, 'edit'])->name('account.settings');
