@@ -10,7 +10,7 @@
             </a>
 
             @auth
-                <a href="{{ route('dashboard.adusermin') }}" class="flex items-center gap-1 hover:text-blue-600 transition">
+                <a href="{{ route('dashboard.user') }}" class="flex items-center gap-1 hover:text-blue-600 transition">
                     <i class="bi bi-person-circle"></i> Dashboard
                 </a>
 
