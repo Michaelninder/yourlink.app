@@ -23,7 +23,6 @@ use App\Http\Controllers\DashboardController;
 
 // Public routes
 Route::get('/', [PageController::class, 'home'])->name('pages.home');
-//Route::get('/', [LinkController::class, 'index'])->name('links.index');
 Route::get('/create', [LinkController::class, 'create'])->name('links.create');
 Route::post('/store', [LinkController::class, 'store'])->name('links.store');
 
@@ -38,26 +37,22 @@ Route::post('/register', [AuthRegisterController::class, 'register']);
 Route::get('/auth/discord/redirect', [AuthDiscordController::class, 'redirect'])->name('discord.redirect');
 Route::get('/auth/discord/callback', [AuthDiscordController::class, 'callback'])->name('discord.callback');
 
-
+// Authenticated routes
 Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'user'])->name('dashboard.user');
+    Route::get('/dashboard', [DashboardController::class, 'overview'])->name('dashboard.user');
+    Route::get('/dashboard/links', [DashboardController::class, 'links'])->name('dashboard.links');
+
+    Route::get('/account/settings', [SettingsController::class, 'edit'])->name('account.settings');
+    Route::post('/account/settings', [SettingsController::class, 'update'])->name('account.settings.update');
 
     Route::middleware('is_admin')->group(function () {
-        Route::get('/admin', [DashboardController::class, 'admin'])->name('dashboard.admin');
+        Route::get('/admin', [DashboardController::class, 'overviewAdmin'])->name('dashboard.admin');
+        Route::get('/admin/links', [DashboardController::class, 'linksAdmin'])->name('admin.links');
     });
 });
 
-Route::middleware(['auth'])->group(function () {
-    Route::get('/account/settings', [SettingsController::class, 'edit'])->name('account.settings');
-    Route::post('/account/settings', [SettingsController::class, 'update'])->name('account.settings.update');
-});
-
-
-
+// Legal
 Route::get('legal/{section}', [LegalController::class, 'show'])->name('legal.show');
 
-
-
-// Redirect shortened links
+// Link redirection
 Route::get('/{shortCode}', [LinkController::class, 'show'])->name('links.redirect');
-
