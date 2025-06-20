@@ -63,7 +63,7 @@ class LinkController extends Controller
             return view('links.guest-success', compact('link'));
         }
 
-        return redirect()->route('links.index')->with('success', 'Link created!');
+        return redirect()->route('dashboard.links')->with('success', 'Link created!');
     }
 
     protected function generateShortUuid(): string
