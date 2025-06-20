@@ -10,22 +10,13 @@ use App\Models\View;
 
 class LinkController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
-        $user = Auth::user();
+        $links = Link::when(Auth::check(), function ($query) {
+            return $query->where('user_id', Auth::id());
+        })->get();
 
-        $query = Link::where('user_id', $user->id);
-
-        if ($search = $request->get('q')) {
-            $query->where(function ($q) use ($search) {
-                $q->where('original_url', 'like', "%{$search}%")
-                  ->orWhere('short_code', 'like', "%{$search}%");
-            });
-        }
-
-        $links = $query->withCount('views')->latest()->paginate(10);
-
-        return view('links.index', compact('links', 'search'));
+        return view('links.index', compact('links'));
     }
 
     public function create()
@@ -37,13 +28,14 @@ class LinkController extends Controller
     {
         $request->validate([
             'original_url' => 'required|url',
-            'custom_code' => 'nullable|alpha_dash|unique:links,short_code',
-            'uuid_type' => 'nullable|in:uuid,short',
+            'custom_code'   => 'nullable|alpha_dash|unique:links,short_code',
+            'uuid_type'     => 'nullable|in:uuid,short',
         ]);
 
         $user = Auth::user();
         $uuidType = $request->input('uuid_type', 'uuid');
 
+        // Prevent guests from choosing short
         if (!$user && $uuidType === 'short') {
             $uuidType = 'uuid';
         }
@@ -79,16 +71,25 @@ class LinkController extends Controller
         return Str::lower(Str::random(8));
     }
 
-    public function show($uuid)
+    /*
+	public function show($shortCode)
     {
-        $link = Link::where('id', $uuid)->firstOrFail();
-
-        View::create([
-            'link_id' => $link->id,
-            'ip_address' => request()->ip(),
-            'user_agent' => request()->userAgent(),
-        ]);
-
+        $link = Link::where('short_code', $shortCode)->firstOrFail();
         return redirect()->away($link->original_url);
     }
+	*/
+	
+	public function show($uuid)
+	{
+	    $link = Link::where('id', $uuid)->firstOrFail();
+	
+	    // Record a view
+	    View::create([
+	        'link_id' => $link->id,
+	        'ip_address' => request()->ip(),
+	        'user_agent' => request()->userAgent(),
+	    ]);
+	
+	        return redirect()->away($link->original_url);
+	}
 }
