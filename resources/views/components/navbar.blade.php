@@ -10,12 +10,12 @@
             </a>
 
             @auth
-                <a href="{{ route('user.dashboard') }}" class="flex items-center gap-1 hover:text-blue-600 transition">
+                <a href="{{ route('dashboard.adusermin') }}" class="flex items-center gap-1 hover:text-blue-600 transition">
                     <i class="bi bi-person-circle"></i> Dashboard
                 </a>
 
                 @if(auth()->user()->role === 'admin')
-                    <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-1 text-red-600 hover:text-red-700 transition">
+                    <a href="{{ route('dashboard.admin') }}" class="flex items-center gap-1 text-red-600 hover:text-red-700 transition">
                         <i class="bi bi-shield-lock-fill"></i> Admin Panel
                     </a>
                 @endif
