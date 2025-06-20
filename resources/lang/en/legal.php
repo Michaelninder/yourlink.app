@@ -13,13 +13,13 @@ return [
 **Website:** [xpsystems.eu](https://xpsystems.eu), [fternis.de](https://fternis.de), [michaelninder.de](https://michaelninder.de)  
 **Email:** legal@yourlink.app  
 
-### Responsibility
+### Responsible Party
 
-Responsible for content according to § 5 TMG: Fabian Ternis
+Fabian Ternis is responsible for this project and its content in accordance with §5 TMG.
 
 ### Disclaimer
 
-We take no responsibility for the content of external links. The respective owners are solely responsible for their content.
+We are not responsible for external links. Their operators are solely liable.
 MD
     ],
 
@@ -28,23 +28,27 @@ MD
         'content' => <<<MD
 ## Terms of Service
 
-By continuing to use our service, you agree to the following terms:
+Welcome to **YourLink.app**, a free service provided by XPSYSTEMS.eu.
 
-### 1. Free Service
+### 1. Free and Optional
 
-YourLink.app is offered as a free service. There are no guarantees or warranties of uptime, availability, or data retention.
+Our platform is entirely free to use. No warranty of uptime or data persistence is provided.
 
-### 2. Prohibited Use
+### 2. Stored Data
 
-Links to or from illegal, harmful, or abusive websites are not permitted. Violations may lead to removal without notice.
+We store your **Discord ID**, **Discord username**, and (if available) **email address** provided via Discord OAuth. This information is stored securely and only used to provide account functionality.
 
-### 3. Deletion
+### 3. User Conduct
 
-We reserve the right to delete any link or data at any time without prior notice or explanation.
+You agree to not create or share links to illegal, malicious, or deceptive content. We reserve the right to remove any content at our discretion.
 
-### 4. Changes
+### 4. Data Deletion
 
-These terms may be updated at any time. Continuing to use the service implies acceptance of any changes.
+Your links or account data may be deleted at any time without notice. You may request deletion via email.
+
+### 5. Modifications
+
+These terms can be modified at any time. Changes will be reflected on this page. Continued usage implies acceptance.
 MD
     ],
 
@@ -53,23 +57,31 @@ MD
         'content' => <<<MD
 ## Privacy Policy
 
-We respect your privacy and commit to the minimal collection of personal data.
+We value your privacy and aim to collect as little personal data as possible.
+
+### What We Store
+
+- Your **Discord ID**
+- Your **Discord username**
+- Your **Discord email address** (if available via OAuth)
+
+This data is used solely to associate links with your account and manage your profile.
 
 ### No Third-Party Cookies
 
-We do not use any third-party tracking cookies.
+We do **not** use cookies from advertising or third-party trackers. Only technical cookies may be used for session and authentication purposes.
 
-### Data Retention
+### Voluntary Login
 
-We store only what is necessary to operate YourLink.app. Data may be deleted at any time by us without obligation.
+Login via Discord is optional. No tracking or logging occurs until you choose to authenticate.
 
-### Discord Login
+### Deletion
 
-If you log in with Discord, we only access your user ID and username as permitted by Discord OAuth.
+You may request deletion of all data by contacting legal@yourlink.app.
 
-### Changes
+### Changes to this Policy
 
-This privacy policy may be modified at any time. Updates will be reflected on this page.
+We may update this policy at any time. Please check this page periodically.
 MD
     ],
 
