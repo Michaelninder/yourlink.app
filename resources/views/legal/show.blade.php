@@ -3,7 +3,7 @@
 @section('title', __('legal.' . $section . '.title'))
 
 @section('content')
-<div class="max-w-3xl mx-auto py-12 px-6 text-gray-800 leading-relaxed space-y-6 markdown">
+<div class="max-w-3xl mx-auto py-12 px-6 text-gray-800 leading-relaxed markdown">
     {!! Illuminate\Support\Str::markdown(__('legal.' . $section . '.content')) !!}
 </div>
 
