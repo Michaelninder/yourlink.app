@@ -1,21 +1,24 @@
 @extends('layouts.dashboard')
 
 @section('dashboard')
-<div class="mb-8">
-    <h2 class="text-2xl font-bold text-gray-800 mb-4">Your Links</h2>
-    <p class="text-gray-600">You have {{ $links_count }} links with {{ $views_count }} views.</p>
-</div>
+<h1 class="text-2xl font-bold mb-6">Your Links</h1>
 
 @if ($links->count())
-    <div class="grid gap-4">
+    <div class="grid grid-cols-1 gap-6">
         @foreach ($links as $link)
-            <div class="bg-white shadow rounded-xl p-4 flex justify-between items-center">
+            <div class="bg-white shadow rounded-lg p-4 flex flex-col md:flex-row justify-between items-start md:items-center">
                 <div>
-                    <p class="font-semibold text-gray-800">{{ $link->title ?? $link->short_code }}</p>
-                    <p class="text-gray-500 text-sm">/{{ $link->short_code }}</p>
+                    <p class="font-semibold text-gray-800">{{ $link->short_code }}</p>
+                    <p class="text-gray-600 text-sm break-all">{{ $link->original_url }}</p>
+                    <p class="text-sm text-gray-400">Views: {{ $link->views_count }}</p>
                 </div>
-                <div class="text-sm text-gray-600">
-                    <span class="font-medium">{{ $link->views->count() }}</span> views
+                <div class="flex space-x-2 mt-4 md:mt-0">
+                    <a href="{{ route('links.edit', $link->id) }}" class="text-blue-600 hover:underline">Edit</a>
+                    <button onclick="copyToClipboard('{{ url($link->short_code) }}')" class="text-green-600 hover:underline">Copy</button>
+                    <form action="{{ route('links.destroy', $link->id) }}" method="POST" onsubmit="return confirm('Delete this link?')">
+                        @csrf @method('DELETE')
+                        <button class="text-red-600 hover:underline">Delete</button>
+                    </form>
                 </div>
             </div>
         @endforeach
@@ -25,6 +28,14 @@
         {{ $links->links() }}
     </div>
 @else
-    <p class="text-gray-500">No links created yet.</p>
+    <p class="text-gray-600">You haven’t created any links yet.</p>
 @endif
+
+<script>
+function copyToClipboard(text) {
+    navigator.clipboard.writeText(text).then(() => {
+        alert('Link copied to clipboard!');
+    });
+}
+</script>
 @endsection
